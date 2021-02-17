@@ -24,25 +24,29 @@ const movieDB = {
     ]
 };
 
-const promo = document.getElementsByClassName("promo__adv");
-promo[0].remove();
+const promo = document.querySelectorAll(".promo__adv img"),
+      genre = document.querySelector(".promo__genre"),
+      filmBg = document.querySelector(".promo__bg"),
+      oldMovie = document.getElementsByClassName("promo__interactive-item"),
+      newMovie = document.querySelector('.promo__interactive-list'),
+      sotrMovie = movieDB.movies.sort();
 
-let genre = document.querySelector(".promo__genre");
+promo.forEach(element =>{
+element.remove();
+});
+
 genre.textContent = "драма";
 
-let filmBg = document.querySelector(".promo__bg");
 filmBg.style.backgroundImage = 'url("img/bg.jpg")';
 
+
 function sortListMoviDB(list) {
-const sotrMovie = list.movies.sort();
-const oldMovie = document.getElementsByClassName("promo__interactive-item");
-let newMovie = document.querySelector('.promo__interactive-list');
-while (oldMovie.length > 0){
-    oldMovie[0].remove();
-}
-for (let i in sotrMovie){
-    newMovie.innerHTML += ` <li class="promo__interactive-item"> ${+i+1}. ${sotrMovie[i]} <div class='delete'></div></li>`;
-}
+    while (oldMovie.length > 0){
+        oldMovie[0].remove();
+    }
+    for (let i in sotrMovie){
+        newMovie.innerHTML += ` <li class="promo__interactive-item"> ${+i+1}. ${sotrMovie[i]} <div class='delete'></div></li>`;
+    }
 }
 
 sortListMoviDB(movieDB);
